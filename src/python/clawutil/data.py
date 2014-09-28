@@ -642,6 +642,7 @@ class ClawInputData(ClawData):
             elif self.bc_lower[i] in [1,'extrap']:   self.bc_lower[i] = 1
             elif self.bc_lower[i] in [2,'periodic']: self.bc_lower[i] = 2
             elif self.bc_lower[i] in [3,'wall']:     self.bc_lower[i] = 3
+            elif self.bc_lower[i] in [5,'sphere']:     self.bc_lower[i] = 5
             else:
                 raise AttributeError("Unrecognized bc_lower: %s" \
                       % self.bc_lower[i])
@@ -657,6 +658,7 @@ class ClawInputData(ClawData):
             elif self.bc_upper[i] in [1,'extrap']:   self.bc_upper[i] = 1
             elif self.bc_upper[i] in [2,'periodic']: self.bc_upper[i] = 2
             elif self.bc_upper[i] in [3,'wall']:     self.bc_upper[i] = 3
+            elif self.bc_upper[i] in [5,'sphere']:     self.bc_upper[i] = 5
             else:
                 raise AttributeError("Unrecognized bc_upper: %s" \
                       % self.bc_upper[i])
