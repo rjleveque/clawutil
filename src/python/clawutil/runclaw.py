@@ -145,18 +145,21 @@ def runclaw(xclawcmd=None, outdir=None, overwrite=True, restart=False,
             make_git_status_file()
 
         fortfiles = glob.glob(os.path.join(outdir,'fort.*'))
+        slicefiles = glob.glob(os.path.join(outdir,'slice*.*'))
         if (overwrite and (not restart)):
             # remove any old versions:
             if verbose:
-                print "==> runclaw: Removing all old fort files in ", outdir
+                print "==> runclaw: Removing all old fort & slice files in ", outdir
             for file in fortfiles:
+                os.remove(file)
+            for file in slicefiles:
                 os.remove(file)
         elif restart:
             if verbose:
-                print "==> runclaw: Restart: leaving original fort files in ", outdir
+	        print "==> runclaw: Restart: leaving original fort & slice files in ", outdir
         else:
             if len(fortfiles) > 1:
-                print "==> runclaw: *** Remove fort.* and try again,"
+                print "==> runclaw: *** Remove fort.* & slice*.* and try again,"
                 print "  or use overwrite=True in call to runxclaw"
                 print "  e.g., by setting CLAW_OVERWRITE = True in Makefile"
                 return
