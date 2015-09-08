@@ -146,20 +146,29 @@ def runclaw(xclawcmd=None, outdir=None, overwrite=True, restart=False,
 
         fortfiles = glob.glob(os.path.join(outdir,'fort.*'))
         slicefiles = glob.glob(os.path.join(outdir,'slice*.*'))
+        if len(slicefiles) > 0:
+            fs = "fort & slice files"
+        else:
+            fs = "fort files"
+
         if (overwrite and (not restart)):
             # remove any old versions:
             if verbose:
-                print "==> runclaw: Removing all old fort & slice files in ", outdir
+                print "==> runclaw: Removing all old %s in %s" % (fs,outdir)
             for file in fortfiles:
                 os.remove(file)
             for file in slicefiles:
                 os.remove(file)
         elif restart:
             if verbose:
-	        print "==> runclaw: Restart: leaving original fort & slice files in ", outdir
+	        print "==> runclaw: Restart: leaving original %s in %s" % (fs,outdir)
         else:
-            if len(fortfiles) > 1:
-                print "==> runclaw: *** Remove fort.* & slice*.* and try again,"
+            # Actually this never happens, 
+            # since if (not overwrite) and (not restart),
+            # the outdir is moved and renamed above.
+            if len(fortfiles) + len(slicefiles) > 0:
+                print "==> runclaw: *** Remove %s from %s and try again," \
+                        % (fs,outdir)
                 print "  or use overwrite=True in call to runxclaw"
                 print "  e.g., by setting CLAW_OVERWRITE = True in Makefile"
                 return
