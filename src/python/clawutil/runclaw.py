@@ -200,7 +200,7 @@ def runclaw(xclawcmd=None, outdir=None, overwrite=True, restart=None,
     if os.path.isfile('b4run.py'):
         b4run_file = os.path.abspath('b4run.py')
     else:
-        b4run_file = os.environ.get('B4RUN', None)
+        b4run_file = os.environ.get('B4RUN', '')
 
     if os.path.isfile(b4run_file):
         import runpy
