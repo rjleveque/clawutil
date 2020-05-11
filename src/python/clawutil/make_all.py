@@ -90,6 +90,8 @@ def make_all(examples_dir = '.',make_clean_first=False, env=None):
     import subprocess
     for directory in dir_list:
 
+        print("=====> %s" % directory)
+
         fout.write("\n=============================================\n")
         fout.write(directory)
         fout.write("\n=============================================\n")
@@ -162,15 +164,16 @@ def make_notebook_htmls(examples_dir = '.',make_clean_first=False, env=None):
 
     current_dir = os.getcwd()
 
-    dir_list = list_examples(examples_dir)
+    #dir_list = list_examples(examples_dir)
     print("Found the following Jupyter notebooks:")
     nb_dir_list = []
-    for d in dir_list:
-        notebooks = glob.glob(d + '/*.ipynb')
-        if len(notebooks) != 0:
-            nb_dir_list.append(d)
-        for nbfile in notebooks:
-            print(nbfile)
+    for (dirpath, subdirs, files) in os.walk('.',topdown=False):
+        if '.ipynb_checkpoints' not in dirpath:
+            notebooks = glob.glob(dirpath + '/*.ipynb')
+            if len(notebooks) != 0:
+                nb_dir_list.append(os.path.abspath(dirpath))
+            for nbfile in notebooks:
+                print(nbfile)
             
     if len(nb_dir_list) == 0:
         print("  none")
@@ -200,6 +203,8 @@ def make_notebook_htmls(examples_dir = '.',make_clean_first=False, env=None):
     
     import subprocess
     for directory in nb_dir_list:
+
+        print("=====> %s" % directory)
 
         fout.write("\n=============================================\n")
         fout.write(directory)
