@@ -239,7 +239,13 @@ def runclaw(xclawcmd=None, outdir=None, overwrite=True, restart=None,
     if isinstance(xclawerr, str):
         xclawerr = open(xclawerr,'w', encoding='utf-8',
                         buffering=1)
-    try:
+                        
+    dyld_library_path = os.environ.get('DYNAMIC_LIBRARY_PATH', None)
+    if dyld_library_path is not None:
+        cmd_split.insert(0,"DYLD_LIBRARY_PATH=%s" % dyld_library_path)        
+        cmd_split.insert(0,"env")
+            
+    try:  
         proc = subprocess.check_call(cmd_split,
                                      cwd=outdir,
                                      stdout=xclawout,
