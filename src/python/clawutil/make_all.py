@@ -161,13 +161,15 @@ def make_notebook_htmls(examples_dir = '.',make_clean_first=False, env=None):
     examples_dir = os.path.abspath(examples_dir)
     if not os.path.isdir(examples_dir):
         raise Exception("Directory not found: %s" % examples_dir)
+        
+    print('==> examples_dir = %s' % examples_dir)
 
     current_dir = os.getcwd()
 
     #dir_list = list_examples(examples_dir)
     print("Found the following Jupyter notebooks:")
     nb_dir_list = []
-    for (dirpath, subdirs, files) in os.walk('.',topdown=False):
+    for (dirpath, subdirs, files) in os.walk(examples_dir,topdown=False):
         if '.ipynb_checkpoints' not in dirpath:
             notebooks = glob.glob(dirpath + '/*.ipynb')
             if len(notebooks) != 0:
@@ -237,12 +239,13 @@ def make_notebook_htmls(examples_dir = '.',make_clean_first=False, env=None):
             print("*** Run errors encountered: see %s\n" % fname_errors)
             badlist_run.append(directory)
 
-        job = subprocess.Popen(['make','README.html'], \
-                  stdout=fout,stderr=ferr,env=my_env)
-        return_code = job.wait()
-        
-        if return_code != 0:
-            print("*** problems making README.html in %s" % directory)
+        if os.path.isfile('README.rst'):
+            job = subprocess.Popen(['make','README.html'], \
+                      stdout=fout,stderr=ferr,env=my_env)
+            return_code = job.wait()
+            
+            if return_code != 0:
+                print("*** problems making README.html in %s" % directory)
 
     print('------------------------------------------------------------- ')
     print(' ')
