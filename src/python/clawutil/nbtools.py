@@ -107,6 +107,8 @@ def make_output(label=None, env=None, verbose=True):
 def make_plots(label=None, env=None, verbose=True):
     """Perform 'make plots' and display links"""
 
+    import os
+
     if label is None: 
         label = ''
     else:
