@@ -95,7 +95,7 @@ def make_output(label=None, env=None, verbose=True):
     else:
         if label[0] != '_':
             label = '_' + label
-    outdir = 'nb_output%s' % str(label)
+    outdir = '_output%s' % str(label)
     outfile = 'run_output%s.txt' % str(label)
 
     args = 'output OUTDIR=%s' % outdir
@@ -114,8 +114,8 @@ def make_plots(label=None, env=None, verbose=True):
     else:
         if label[0] != '_':
             label = '_' + label
-    outdir = 'nb_output%s' % str(label)
-    plotdir = 'nb_plots%s' % str(label)
+    outdir = '_output%s' % str(label)
+    plotdir = '_plots%s' % str(label)
     outfile = 'plot_output%s.txt' % str(label)
 
     args = 'plots OUTDIR=%s PLOTDIR=%s' % (outdir,plotdir)
@@ -148,8 +148,8 @@ def make_all(label=None, env=None, verbose=True):
     else:
         if label[0] != '_':
             label = '_' + label
-    outdir = 'nb_output%s' % str(label)
-    plotdir = 'nb_plots%s' % str(label)
+    outdir = '_output%s' % str(label)
+    plotdir = '_plots%s' % str(label)
     outfile = 'make_all_output%s.txt' % str(label)
 
     args = 'all OUTDIR=%s PLOTDIR=%s' % (outdir,plotdir)
