@@ -337,6 +337,13 @@ class ClawpackRegressionTest(unittest.TestCase):
             gauge_file_name = "gauge%s.txt" % str(gauge_id).zfill(5)
             shutil.copy(os.path.join(self.temp_path, gauge_file_name), 
                                                            regression_data_path)
+
+            # check for .bin file and if it exists, copy that too:
+            gauge_file_name = "gauge%s.bin" % str(gauge_id).zfill(5)
+            gauge_file_path = os.path.join(self.temp_path, gauge_file_name)
+            if os.path.isfile(gauge_file_path):
+                shutil.copy(gauge_file_path, regression_data_path)
+
             claw_git_status.make_git_status_file(outdir=regression_data_path)
 
         regression_gauge = gauges.GaugeSolution(gauge_id,
