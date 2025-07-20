@@ -372,7 +372,7 @@ if __name__ == "__main__":
                     file_pattern = args[2][1:-1].split(',')
                 else:
                     file_pattern = args[2]
-                sys.exit(chardiff_dir(args[0],args[1],file_pattern,verbose=verbose))
+                sys.exit(chardiff_dir(args[0],args[1],file_pattern=file_pattern,verbose=verbose))
             else:
                 sys.exit(chardiff_dir(args[0],args[1],verbose=verbose))
         else:
